@@ -15,7 +15,7 @@ class ProductsController extends Controller
     {
         if (true === $this->request->isPost()) {
             echo " i am post request";
-            print_r($this->request->getPost());
+     
             $product = new Products();
             $product->assign(
                 $this->request->getPost(),

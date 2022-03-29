@@ -1,0 +1,71 @@
+<?php
+
+// var_dump($setting);
+echo $this->tag->linkTo(
+    '/',
+    'BACK'
+);
+echo "<p>";
+echo $this->tag->linkTo(
+    '/index/Settings',
+    'Settings'
+);
+echo "</p>";
+?>
+
+<?php if(isset($success)) {?>
+<div class="alert alert-<?php echo $success === true ? 'success' : 'danger'; ?>">
+    <?php echo $message; 
+   ?>
+</div>
+<?php }?>
+
+
+
+<h2>Edit Settings using this form</h2>
+<?php echo $this->tag->form(""); ?>
+
+
+<p>
+        <label for="name">title_optimization</label>
+        <?php echo $this->tag->select(
+       
+            [
+                'title_optimization',
+                [
+                    'With tags' => 'With tags',
+                    'Without tags' => 'Without tags',
+                ],
+                'value' => $setting->title_optimization
+          
+                ]);?>
+    </p>
+    <p>
+        <label for="name">default_price</label>
+        <?php echo $this->tag->numericField([
+            "default_price",
+            'value' => $setting->default_price
+            ]); ?>
+    </p>
+
+    <p>
+        <label for="name">default_stock</label>
+        <?php echo $this->tag->numericField(["default_stock",
+         'value'=>$setting->default_stock]); ?>
+    </p>
+    <p>
+        <label for="name">default_zipcode</label>
+        <?php echo $this->tag->numericField(["default_zipcode",
+    'value'=>$setting->default_zipcode]); ?>
+    </p>
+
+
+
+    <p>
+        <?php echo $this->tag->submitButton("Update"); ?>
+    </p>
+
+    
+
+
+</form>
