@@ -1,0 +1,33 @@
+<?php
+
+echo $this->tag->linkTo(
+    '/',
+    'BACK'
+);
+?>
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">customer_name</th>
+      <th scope="col">customer_address</th>
+      <th scope="col">zipcode</th>
+      <th scope="col">product </th>
+      <th scope="col">quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+      <?php foreach($allorders as $key =>$value) {?>
+    <tr>
+      <th scope="row"><?php echo $value->order_id; ?></th>
+      <td><?php echo $value->customer_name; ?></td>
+      <td><?php echo $value->customer_address; ?></td>
+      <td><?php echo $value->zipcode; ?></td>
+      <td><?php echo $value->product; ?></td>
+      <td><?php echo $value->quantity; ?></td>
+    </tr>
+    <?php }?>
+  </tbody>
+</table>

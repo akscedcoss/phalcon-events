@@ -1,0 +1,67 @@
+<?php
+
+echo $this->tag->linkTo(
+    '/',
+    'BACK'
+);
+?>
+
+<?php if(isset($success)) {?>
+<div class="alert alert-<?php echo $success === true ? 'success' : 'danger'; ?>">
+    <?php echo $message; 
+    echo $this->tag->linkTo(
+        'orders',
+        'List All Orders'
+    ); ?>
+</div>
+<?php }?>
+
+
+
+<h2>Add Orders  using this form</h2>
+<?php echo $this->tag->form("orders/add"); ?>
+
+    <p>
+        <label for="name">customer_name</label>
+        <?php echo $this->tag->textField("customer_name"); ?>
+    </p>
+
+    <p>
+        <label for="name">customer_address</label>
+        <?php echo $this->tag->textField("customer_address"); ?>
+    </p>
+    <p>
+        <label for="name">zipcode</label>
+        <?php echo $this->tag->textField("zipcode"); ?>
+    </p>
+    <p>
+        <label for="name">Select product</label>
+        <?php echo $this->tag->select(
+        [
+            'product',
+            $allProds,
+            'using'      => [
+                'Name',
+                'Name',
+            ],
+            'useEmpty'   => true,
+            'emptyText'  => 'Please, choose one...',
+            'emptyValue' => '@',
+        ]
+       );?>
+    </p>
+    <p>
+        <label for="name">quantity</label>
+        <?php echo $this->tag->numericField("quantity"); ?>
+    </p>
+
+
+
+    <p>
+        <?php echo $this->tag->submitButton("Add"); ?>
+    </p>
+
+    
+
+
+</form>

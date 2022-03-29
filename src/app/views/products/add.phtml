@@ -1,0 +1,51 @@
+<?php
+
+echo $this->tag->linkTo(
+    '/',
+    'BACK'
+);
+?>
+
+<?php if(isset($success)) {?>
+<div class="alert alert-<?php echo $success === true ? 'success' : 'danger'; ?>">
+    <?php echo $message; ?>
+</div>
+<?php }?>
+
+
+
+<h2>Add Prodcuts using this form</h2>
+<?php echo $this->tag->form("products/add"); ?>
+
+    <p>
+        <label for="name">Name</label>
+        <?php echo $this->tag->textField("Name"); ?>
+    </p>
+
+    <p>
+        <label for="name">Description</label>
+        <?php echo $this->tag->textField("Description"); ?>
+    </p>
+    <p>
+        <label for="name">Tags</label>
+        <?php echo $this->tag->textField("Tags"); ?>
+    </p>
+    <p>
+        <label for="name">Price</label>
+        <?php echo $this->tag->textField("Price"); ?>
+    </p>
+    <p>
+        <label for="name">Stocks</label>
+        <?php echo $this->tag->numericField("Stock"); ?>
+    </p>
+
+
+
+    <p>
+        <?php echo $this->tag->submitButton("Add"); ?>
+    </p>
+
+    
+
+
+</form>
