@@ -1,0 +1,32 @@
+<?php
+
+echo $this->tag->linkTo(
+    '/',
+    'BACK'
+);
+?>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Tags</th>
+      <th scope="col">Price </th>
+      <th scope="col">Stock</th>
+    </tr>
+  </thead>
+  <tbody>
+      <?php foreach($allProds as $key =>$value) {?>
+    <tr>
+      <th scope="row"><?php echo $value->id; ?></th>
+      <td><?php echo $value->Name; ?></td>
+      <td><?php echo $value->Description; ?></td>
+      <td><?php echo $value->Tags; ?></td>
+      <td><?php echo $value->Price; ?></td>
+      <td><?php echo $value->Stock; ?></td>
+    </tr>
+    <?php }?>
+  </tbody>
+</table>

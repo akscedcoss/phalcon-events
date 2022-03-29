@@ -1,12 +1,13 @@
 <?php
 
-use Phalcon\Mvc\Collection;
 
-Class Products extends Collection{
+use Phalcon\Mvc\Model;
 
-
-    public $id;
-    public $name;
-
-    
+class Products extends Model
+{    public $id;
+    public $Name;
+    public $Description;
+    public $Tags;
+    public $Price;
+    public $Stock;	
 }

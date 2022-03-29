@@ -7,9 +7,9 @@ class ProductsController extends Controller
 {
     public function indexAction()
     {
-      
-        
-        echo "i am in products index";
+        $products = new Products();
+        $allProds=Products::find();
+        $this->view->allProds=$allProds;
     }
     public function addAction()
     {
