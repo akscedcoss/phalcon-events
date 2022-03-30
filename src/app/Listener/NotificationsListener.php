@@ -2,13 +2,41 @@
 
 namespace App\Listener;
 use Phalcon\Events\Event;
+
 class NotificationsListener 
 {
-   public function beforeHandleRequest(Event $event)
+   public function beforeHandleRequest(Event $event,$application)
    {
-    //  echo "i am Before Request ";
-    //  die();
+ 
+     $aclfile = APP_PATH . '/security/acl.cache';
+     if (is_file($aclfile) == true) {
+    
+         $acl = unserialize(
+             file_get_contents($aclfile)
+         );
+         $role = $application->request->get('role');
+        
+         if (!$role || true !== $acl->isAllowed($role, 'Index', 'index')) {
+             echo "access denied";
+             die();
+         }
+     } else {
+
+         echo "No ACL ";
+        //  die();
+     }
+  
    }
+
+   
+
+
+
+
+
+
+
+
     public function beforeSend (Event $event, $component,$setting)
     {   
         $data=[
