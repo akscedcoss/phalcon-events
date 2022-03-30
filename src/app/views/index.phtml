@@ -7,6 +7,44 @@
 </head>
 <body>
 <div class="container">
+    <?php 
+    
+ 
+echo $this->tag->linkTo(
+    'products',
+    'List All Products'
+);
+;
+
+echo $this->tag->linkTo(
+    'products/add',
+    'Add New Product'
+);
+
+
+
+echo $this->tag->linkTo(
+    'orders',
+    'List All Orders'
+);
+
+
+
+echo $this->tag->linkTo(
+    'orders/add',
+    'Add New Order'
+);
+
+
+
+
+echo $this->tag->linkTo(
+    '/index/Settings',
+    'Settings'
+);
+
+
+    ?>
     <?php echo $this->getContent(); ?>
 </div>
 </body>

@@ -4,7 +4,11 @@ namespace App\Listener;
 use Phalcon\Events\Event;
 class NotificationsListener 
 {
-
+   public function beforeHandleRequest(Event $event)
+   {
+    //  echo "i am Before Request ";
+    //  die();
+   }
     public function beforeSend (Event $event, $component,$setting)
     {   
         $data=[

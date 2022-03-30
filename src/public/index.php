@@ -49,6 +49,10 @@ $eventsManager->attach(
     new App\Listener\NotificationsListener()
 );
 
+$eventsManager->attach(
+    'application:beforeHandleRequest',
+    new App\Listener\NotificationsListener()
+);
 
 $container->set('eventsManager', $eventsManager);
 // Event Managment End 
@@ -72,6 +76,7 @@ $container->set(
 
 $application = new Application($container);
 
+$application->setEventsManager($eventsManager);
 $fileName = '../app/etc/config.php';
 $factory  = new ConfigFactory();
 $config = $factory->newInstance('php', $fileName);
