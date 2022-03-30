@@ -14,11 +14,19 @@ class ProductsController extends Controller
     public function addAction()
     {
         if (true === $this->request->isPost()) {
-            echo " i am post request";
-     
+            $data= $this->request->getPost();
+            // getting Settings data 
+            $Setting = new Settings();
+            $Setting=Settings::find(['set_id'=>'1']);
+
+            //Fire event to check Setting 
+            $eventsManager = $this->eventsManager;
+            $data= $this->eventsManager->fire('notifications:beforeSend', $this,$Setting[0]);
+            // Fire event End 
+
             $product = new Products();
             $product->assign(
-                $this->request->getPost(),
+                $data,
                 [
                     'Name',
                     'Description',
@@ -27,6 +35,7 @@ class ProductsController extends Controller
                     'Stock'
                 ]
             );
+
             $success =  $product->save();
             $this->view->success = $success;
             if($success)

@@ -39,6 +39,7 @@ class IndexController extends Controller
         if($success)
         {
             $this->view->message = "Updated  succesfully";
+
         }
         else {
             $this->view->message = "Updation Failed :<br>" . implode("<br>", $Setting[0]->getMessages());
