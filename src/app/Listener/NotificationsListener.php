@@ -8,23 +8,23 @@ class NotificationsListener
    public function beforeHandleRequest(Event $event,$application)
    {
  
-     $aclfile = APP_PATH . '/security/acl.cache';
-     if (is_file($aclfile) == true) {
+    //  $aclfile = APP_PATH . '/security/acl.cache';
+    //  if (is_file($aclfile) == true) {
     
-         $acl = unserialize(
-             file_get_contents($aclfile)
-         );
-         $role = $application->request->get('role');
+    //      $acl = unserialize(
+    //          file_get_contents($aclfile)
+    //      );
+    //      $role = $application->request->get('role');
         
-         if (!$role || true !== $acl->isAllowed($role, 'Index', 'index')) {
-             echo "access denied";
-             die();
-         }
-     } else {
+    //      if (!$role || true !== $acl->isAllowed($role, 'Index', 'index')) {
+    //          echo "access denied";
+    //          die();
+    //      }
+    //  } else {
 
-         echo "No ACL ";
-        //  die();
-     }
+    //      echo "No ACL ";
+    //     //  die();
+    //  }
   
    }
 
