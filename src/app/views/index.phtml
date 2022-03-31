@@ -5,47 +5,67 @@
     <title>Phalcon Tutorial</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
+
+ 
 <body>
 <div class="container">
     <?php 
     
  
 echo $this->tag->linkTo(
+    [
     'products',
-    'List All Products'
+    'List All Products',
+    'class'=>'btn btn-outline-success my-2 my-sm-0']
 );
 ;
 
 echo $this->tag->linkTo(
-    'products/add',
-    'Add New Product'
+    ['products/add',
+    'Add New Product',
+    'class'=>'btn btn-outline-success my-2 my-sm-0']
 );
 
 
 
 echo $this->tag->linkTo(
-    'orders',
-    'List All Orders'
+   [ 'orders',
+    'List All Orders',
+    'class'=>'btn btn-outline-success my-2 my-sm-0']
 );
 
 
 
 echo $this->tag->linkTo(
+    [
     'orders/add',
-    'Add New Order'
+    'Add New Order',
+    'class'=>'btn btn-outline-success my-2 my-sm-0']
 );
 
 
 
 
 echo $this->tag->linkTo(
-    '/index/Settings',
-    'Settings'
+   [ '/index/Settings',
+    'Settings',
+    'class'=>'btn btn-outline-success my-2 my-sm-0']
 );
 
-
-    ?>
+echo $this->tag->linkTo(
+    [ 'secure/addRoles/',
+     'Add/View Roles',
+     'class'=>'btn btn-outline-success my-2 my-sm-0']
+ );
+ echo $this->tag->linkTo(
+    [ 'secure/SetPermissions',
+     'Add/View Permissions',
+     'class'=>'btn btn-outline-success my-2 my-sm-0']
+ );
+?>
+    
     <?php echo $this->getContent(); ?>
 </div>
 </body>
+
 </html>

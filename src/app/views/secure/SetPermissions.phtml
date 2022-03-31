@@ -1,0 +1,79 @@
+
+<?php if(isset($success)) {?>
+<div class="alert alert-<?php echo $success === true ? 'success' : 'danger'; ?>">
+    <?php echo $message; 
+   ?>
+</div>
+<?php }?>
+
+<h2>Exsisting Permissions Table</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Role</th>
+      <th scope="col">Component</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach ($permissons as $key=>$value)
+        {
+            echo "<tr><th scope='row'>$value->id</th><td>$value->role</td><td>$value->component</td><td>$value->action</td></tr>";
+        }?>
+  </tbody>
+</table>
+
+<h2>Add Permissions using this form</h2>
+
+
+
+
+<!-- First Form To Select Roles if its Selected Hide it  -->
+<?php if (!isset($role) ){?>
+  <?php echo $this->tag->form(""); ?>
+
+<p>
+        <label for="name">Role </label>
+        <?php echo $this->tag->select(
+        [
+            'roles',
+            $roles,
+            'using'      => [
+                'role',
+                'role',
+            ],
+            'useEmpty'   => true,
+            'emptyText'  => 'Please, choose one...',
+            'emptyValue' => '@',
+        ]
+       );?>
+</p>
+    <?php echo $this->tag->submitButton("Select Role"); ?>
+</form>
+<?php } ?>
+
+<!-- Second form for selecting Component if Role Selected and Component is Not selected  -->
+<?php if (isset($role) && !isset($selectedcontroller) ){?>
+<h1> <?php echo "Role => ".$role ?></h1>
+<!-- Form tag -->
+<?php $actiondata=array_combine($actiondata,$actiondata);?>
+<?php echo $this->tag->form(""); ?>
+<p>
+        <label for="name"> Select Controller </label>
+        <?php echo $this->tag->select(
+        [
+            'controller',
+            $actiondata,
+
+            'useEmpty'   => true,
+            'emptyText'  => 'Please, choose one...',
+            'emptyValue' => '@',
+       
+        ]
+       );?>
+           <?php echo $this->tag->submitButton("Select Controller"); ?>
+</p>
+
+</form>
+<?php } ?>
