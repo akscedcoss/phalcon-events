@@ -60,6 +60,15 @@
 <?php $actiondata=array_combine($actiondata,$actiondata);?>
 <?php echo $this->tag->form(""); ?>
 <p>
+<?php echo $this->tag->textField(
+  [
+    "roles",
+    "size" => 30,
+    "value"=>$role,
+    'readonly' => 'true'
+]
+);?>
+
         <label for="name"> Select Controller </label>
         <?php echo $this->tag->select(
         [
@@ -77,3 +86,52 @@
 
 </form>
 <?php } ?>
+<!-- Thhird Form To Select Action  -->
+<?php if (isset($role) && isset($selectedcontroller) && !isset($selectedaction) ){?>
+<!-- Form tag  -->
+<?php echo $this->tag->form(""); ?>
+
+<!-- Show Selected Role  Role  -->
+<?php echo $this->tag->textField(
+  [
+    "roles",
+    "size" => 30,
+    "value"=>$role,
+    'readonly' => 'true'
+]
+);?>
+<!-- Show selected Controller  -->
+<?php echo $this->tag->textField(
+  [
+    "controller",
+    "size" => 30,
+    "value"=>$selectedcontroller,
+    'readonly' => 'true'
+]
+);?>
+<!-- Making Assoc array for Action -->
+<?php  $actions=array_combine($data[$selectedcontroller],$data[$selectedcontroller]);?>
+<!-- Choose action -->
+<label>Please choose Action</label>
+<?php echo $this->tag->select(
+        [
+            'actions',
+            $actions,
+
+            'useEmpty'   => true,
+            'emptyText'  => 'Please, choose one...',
+            'emptyValue' => '@',
+       
+        ]
+       );?>
+   <?php echo $this->tag->submitButton("Select Action"); ?>
+</form>
+
+<?php } ?> 
+<!-- Third forms End Here  -->
+
+
+
+
+
+

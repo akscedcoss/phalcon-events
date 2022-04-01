@@ -19,8 +19,6 @@ class SecureController extends Controller
 
             $acl = new Memory();
             $acl->addRole('Admin');
-            $acl->addRole('Customer');
-            $acl->addRole('Guest');
 
             $acl->addComponent(
                 'Index',
@@ -155,7 +153,7 @@ class SecureController extends Controller
         $this->view->data=$data;
 
           
-       
+        global  $role;
         // When Roles is Selected 
         if ($this->request->getPost('roles')) {
             // Get Role 
@@ -177,11 +175,78 @@ class SecureController extends Controller
              $this->view->message="Please Select controller ";
          }
          else{
-            // Now  Select Controller of that action  
+            $this->view->role=$this->request->getPost("roles");
             $this->view->selectedcontroller=$controller;
         }
+       // when Action  is Selected 
+       if ($this->request->getPost('actions')) { 
+        $controller=$this->request->getPost("actions");
+        if($controller==='@')
+        {   $this->view->success=false;
+            $this->view->message="Please Select actions ";
+        }
+        else{
+            //  print_r($this->request->getPost());
+            $role=$this->request->getPost("roles");
+            $contr=str_replace("Controller","", $this->request->getPost("controller"));
+            $action=str_replace("Action","", $this->request->getPost("actions"));
+
+            // Add Permsions to db;
+            $permissons = new Permissions();
+            $d=array('role'=>$role,'component'=>$contr,'action'=>$action);
+            $permissons->assign(
+                $d,
+                [
+                    'role',
+                    'component',
+                    'action'
+
+                ]
+            );
+            $success = $permissons->save();
+            echo $success;
+
+           // Add permissions to acl File  ;
+           $aclfile = APP_PATH . '/security/acl.cache';
+
+           if (true !== is_File($aclfile)) {
+               // Redirect to build ACl And Role will be added as its in DB.
+               $this->response->redirect('/Secure/buildacl'); 
+             }
+            else 
+            {
+                //Step 1 Unserialize
+                $acl = unserialize(file_get_contents($aclfile));
+                // Step 2 Add Role 
+                $acl->addRole($role);
+                // Add Component 
+                //  var_dump($acl);
+                 echo "++++++++++++++++++++++++++++++++++++++++++++";
+                // die();
+                $acl->addComponent(
+                    $contr,
+                    [
+                        $action,
+    
+                    ]
+                );
+                // var_dump($acl);
+                $acl->allow($role, $contr, $action);
+
+
+            file_put_contents(
+                $aclfile,
+                serialize($acl)
+            );
+                echo "++++++++++++++++++++++++++++++++++++++++++++";
+        //  Redirect 
+        $this->response->redirect('/secure/SetPermissions');
+            }
+
+       }
        
 
        }
     }
+}
 }
